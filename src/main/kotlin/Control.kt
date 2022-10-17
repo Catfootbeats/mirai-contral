@@ -1,13 +1,7 @@
 package xyz.catfootbeats
 
-import xyz.catfootbeats.Net.closeClient
-import xyz.catfootbeats.Net.normalClient
-import xyz.catfootbeats.config.CommandConfig
-import xyz.catfootbeats.config.Setting
 import io.ktor.client.request.*
 import kotlinx.coroutines.launch
-import net.mamoe.mirai.console.command.CommandManager.INSTANCE.register
-import net.mamoe.mirai.console.command.CommandManager.INSTANCE.unregister
 import net.mamoe.mirai.console.permission.Permission
 import net.mamoe.mirai.console.permission.PermissionId
 import net.mamoe.mirai.console.permission.PermissionService
@@ -20,15 +14,17 @@ import net.mamoe.mirai.console.plugin.version
 import net.mamoe.mirai.contact.Member
 import net.mamoe.mirai.contact.isOperator
 import net.mamoe.mirai.utils.info
-import xyz.catfootbeats.Listener.Command
 import xyz.catfootbeats.Listener.SayListenerRegister
-import xyz.catfootbeats.example.MySimpleCommand
+import xyz.catfootbeats.Net.closeClient
+import xyz.catfootbeats.Net.normalClient
+import xyz.catfootbeats.config.CommandConfig
+import xyz.catfootbeats.config.Setting
 
 object Control : KotlinPlugin(
     JvmPluginDescription(
         id = "xyz.catfootbeats.control",
         name = "Control",
-        version = "0.1.0",
+        version = "0.1.1",
     ) {
         author("Catfootbeats")
         info("""控制你的Bot""")
@@ -41,7 +37,6 @@ object Control : KotlinPlugin(
         }
         CommandConfig.reload()
         Setting.reload()
-        Command.register()
         adminPermission = PermissionService.INSTANCE.register(
             PermissionId(name, "admin"),
             "管理员权限"
@@ -52,7 +47,6 @@ object Control : KotlinPlugin(
 
     override fun onDisable() {
         closeClient()
-        Command.unregister()
     }
     fun checkPermission(sender:Member):Boolean{
         when(Setting.mode){
