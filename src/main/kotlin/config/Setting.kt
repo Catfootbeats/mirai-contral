@@ -28,6 +28,6 @@ object Setting:ReadOnlyPluginConfig("Setting") {
     val noGroup by value("没有加入这个群哦(～￣▽￣)～,或者。。被禁言了w(ﾟДﾟ)w")
     @ValueDescription("无权撤回")
     val notRecall by value("没有权力撤回别人的发言")
-    @ValueDescription("撤回超时")
+    @ValueDescription("撤回超时(不知道为啥这玩意用不了)")
     val outOffTimeRecall by value("发言就像泼出去的水，收不回来啦")
 }
