@@ -34,7 +34,7 @@ object Command : CompositeCommand(Control, "ctrl", description = "控制插件")
             食用方法：
             /ctrl 主命令(唱跳rap篮球?)
             /ctrl help 获取帮助(其实你早就知道了吧，不然你咋进来的)
-            /ctrl send <消息> <目标群(空时为本群)>
+            /ctrl send <消息(为null时会获取用户的下一条消息)> <目标群(空时为本群)>
             /recall <引用> 让Bot撤回自己的消息
             """.trimIndent()
         sendMessage(text)
