@@ -9,11 +9,11 @@ import xyz.catfootbeats.config.Setting
 fun recallListener() {
     GlobalEventChannel.subscribeMessages {
         always {
-            if (message.contentToString().startsWith("/recall")){
-                if (Control.checkPermission(sender!!)){
+            if (message.contentToString().startsWith(Setting.recallCommand)){
+                if (Control.checkPermission(sender)){
                     val quoteReply = message[QuoteReply]
                     if (quoteReply == null){
-                        subject.sendMessage("没有找到引用")
+                        subject.sendMessage(Setting.referenceNotFound)
                     }else{
                         if (quoteReply.source.fromId == bot.id){
                             try {
@@ -32,10 +32,4 @@ fun recallListener() {
         }
     }
 }
-private fun String.startsWith(msg: MutableList<String>): Boolean {
-    msg.forEach {
-        if (this.startsWith(it))
-            return true
-    }
-    return false
-}
+private fun String.startsWith(msg: MutableList<String>) = msg.any { startsWith(it) }

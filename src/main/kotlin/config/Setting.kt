@@ -3,9 +3,20 @@ package xyz.catfootbeats.config
 import net.mamoe.mirai.console.data.ReadOnlyPluginConfig
 import net.mamoe.mirai.console.data.ValueDescription
 import net.mamoe.mirai.console.data.value
+import xyz.catfootbeats.Control
+import xyz.catfootbeats.Control.reload
+import kotlin.concurrent.timer
 
 object Setting:ReadOnlyPluginConfig("Setting") {
-
+    private val file = Control.resolveConfigFile("Setting.yml")
+    private var lastModify = file.lastModified()
+    @Suppress("unused")
+    private var loader = timer("config-reloader",true,1000,1000){
+        if (file.lastModified()!= lastModify){
+            reload()
+            lastModify = file.lastModified()
+        }
+    }
 
     @ValueDescription(
         """
@@ -14,7 +25,7 @@ object Setting:ReadOnlyPluginConfig("Setting") {
         控制模式
         0 主人可以控制
         1 拥有权限(admin)者可控
-        修改后可能需要重启mirai-console才可生效
+        修改后可自动加载变更
         """
     )
     val mode by value(0)
@@ -30,4 +41,18 @@ object Setting:ReadOnlyPluginConfig("Setting") {
     val notRecall by value("没有权力撤回别人的发言")
     @ValueDescription("撤回超时(不知道为啥这玩意用不了)")
     val outOffTimeRecall by value("发言就像泼出去的水，收不回来啦")
+    @ValueDescription("取消发送的关键字")
+    val cancelWord by value("取消")
+    @ValueDescription("取消发送成功")
+    val canceled: String by value("好哒")
+    @ValueDescription("获取下一条消息(send指令)时的提示语句")
+    val waitingNextMessage by value("请发送需要发送的消息，如需取消请发送 '$cancelWord' (记得去掉单引号ヾ(•ω•`)o)")
+    @ValueDescription("获取下一条消息(send指令)时的等待时间")
+    val waitTime: Long by value(30*1000L)
+    @ValueDescription("通过回复撤回消息时，若没有找到回复消息")
+    val referenceNotFound: String by value("没有找到你说的这条消息呢ㄟ( ▔, ▔ )ㄏ")
+    @ValueDescription("撤回指令的前缀")
+    val recallCommand: MutableList<String> by value(mutableListOf("/recall"))
+
+
 }
