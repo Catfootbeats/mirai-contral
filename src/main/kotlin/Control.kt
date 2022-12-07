@@ -42,8 +42,8 @@ object Control : KotlinPlugin(
             "管理员权限"
         )
         AbstractPermitteeId.AnyUser.permit(Command.permission)
-        logger.info { "Plugin loaded!(～￣▽￣)～" }
         recallListener()
+        logger.info { "Plugin loaded!(～￣▽￣)～" }
     }
 
     override fun onDisable() {
