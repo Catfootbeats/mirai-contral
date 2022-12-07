@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "xyz.catfootbeats"
-version = "0.2.0"
+version = "0.3.0"
 
 repositories {
     maven("https://maven.aliyun.com/repository/public")

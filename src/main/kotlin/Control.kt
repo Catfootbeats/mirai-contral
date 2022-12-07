@@ -24,7 +24,7 @@ object Control : KotlinPlugin(
     JvmPluginDescription(
         id = "xyz.catfootbeats.control",
         name = "Control",
-        version = "0.2.0",
+        version = "0.3.0",
     ) {
         author("Catfootbeats")
         info("""控制你的Bot""")
