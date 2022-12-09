@@ -29,11 +29,11 @@ object Command : CompositeCommand(Control, "ctrl", description = "控制插件")
     suspend fun CommandSender.help() {
         val text = """
             控制插件
-            版本：v0.2.0
-            由Catfootbeats开发
+            版本：v0.3.0
+            由Control项目的贡献者共同开发(Catfootbeats和RikaCelery)
             食用方法：
-            /ctrl 主命令(唱跳rap篮球?)
-            /ctrl help 获取帮助(其实你早就知道了吧，不然你咋进来的)
+            /ctrl 主命令
+            /ctrl help 获取帮助
             /ctrl send <消息(为null时会获取用户的下一条消息)> <目标群(空时为本群)>
             /recall <引用> 让Bot撤回自己的消息
             """.trimIndent()
