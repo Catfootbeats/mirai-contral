@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.ir.backend.js.compile
+
 plugins {
     val kotlinVersion = "1.6.21"
     kotlin("jvm") version kotlinVersion
@@ -12,4 +14,8 @@ version = "0.3.0"
 repositories {
     maven("https://maven.aliyun.com/repository/public")
     mavenCentral()
+}
+
+dependencies{
+    
 }

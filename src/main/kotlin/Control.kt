@@ -26,7 +26,7 @@ object Control : KotlinPlugin(
         name = "Control",
         version = "0.3.0",
     ) {
-        author("Catfootbeats")
+        author("Control的开发者")
         info("""控制你的Bot""")
     }
 ) {
@@ -43,7 +43,7 @@ object Control : KotlinPlugin(
         )
         AbstractPermitteeId.AnyUser.permit(Command.permission)
         recallListener()
-        logger.info { "Plugin loaded!(～￣▽￣)～" }
+        logger.info { "Plugin loaded!" }
     }
 
     override fun onDisable() {
@@ -64,14 +64,14 @@ object Control : KotlinPlugin(
         }
         return false
     }
-    suspend fun checkUpdate() {
+    private suspend fun checkUpdate() {
         try {
             val lastVersion:String =
                 normalClient.get("https://cdn.jsdelivr.net/gh/Catfootbeats/mirai-contral@main/version.txt")
-            if (lastVersion.equals(version.toString() + "\n")) {
-                logger.info("当前版本为:${version}(￣︶￣)")
+            if (lastVersion == version.toString() + "\n") {
+                logger.info("当前版本为:${version}")
             }else{
-                logger.info("当前版本为:${version},最新版本为:${lastVersion}w(ﾟДﾟ)w")
+                logger.warning("当前版本为:${version},最新版本为:${lastVersion}")
             }
         }catch (e:Exception){
             logger.warning("获取版本错误，当前版本${version}")
